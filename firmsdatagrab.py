@@ -14,14 +14,17 @@
 import csv
 import requests
 
-CSV_URL = 'https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/MODIS_C6_USA_contiguous_and_Hawaii_24h.csv'
+V_CSV_URL = 'https://firms.modaps.eosdis.nasa.gov/data/active_fire/viirs/csv/VNP14IMGTDL_NRT_USA_contiguous_and_Hawaii_24h.csv'
+M_CSV_URL = 'https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/MODIS_C6_USA_contiguous_and_Hawaii_24h.csv'
+
 
 with requests.Session() as s:
-    download = s.get(CSV_URL)
+    download = s.get(M_CSV_URL)
 
     decoded_content = download.content.decode('utf-8')
 
     cr = csv.reader(decoded_content.splitlines(), delimiter=',')
     my_list = list(cr)
+    list_of_dict = []
     for row in my_list:
         print(row)
