@@ -14,15 +14,15 @@ def index(request):
         }
     return render(request,'fmsapp/index.html', context)
 
-def add_address(request):
-    if request.method == "POST":
-        new_user = request.user
-        new_street_address = request.POST['street_address']
-        new_city = request.POST['city']
-        new_state = request.POST['state']
-        new_address = Address(user=new_user, street_address=new_street_address, city=new_city, state=new_state)
-        new_address.save()
-    return HttpResponseRedirect(reverse('fmsapp:index'))
+# def add_address(request):
+#     if request.method == "POST":
+#         new_user = request.user
+#         new_street_address = request.POST['street_address']
+#         new_city = request.POST['city']
+#         new_state = request.POST['state']
+#         new_address = Address(user=new_user, street_address=new_street_address, city=new_city, state=new_state)
+#         new_address.save()
+#     return HttpResponseRedirect(reverse('fmsapp:index'))
 
 def delete_address(request):
     pass
