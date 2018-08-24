@@ -4,7 +4,7 @@
     <style>
        /* Set the size of the div element that contains the map */
       #map {
-        height: 400px;  /* The height is 400 pixels */
+        height: 700px;  /* The height is 400 pixels */
         width: 100%;  /* The width is the width of the web page */
        }
     </style>
@@ -17,12 +17,27 @@
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
-  var uluru = {lat: {{lat}}, lng: {{lng}}};
+  var uluru = {lat: {{user_lat}}, lng: {{user_lng}}};
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
+      document.getElementById('map'), {zoom: 4, center: uluru, mapTypeId: 'terrain'});
   // The marker, positioned at Uluru
   var marker = new google.maps.Marker({position: uluru, map: map});
+
+  var fire_lat = {{fire_lat}};
+  var fire_lng = {{fire_lng}};
+  var heatmapData = [];
+
+  for (var i = 0; i < fire_lat.length; i++) {
+    var latLng = new google.maps.LatLng(fire_lat[i],fire_lng[i]);
+    heatmapData.push(latLng);
+  };
+  var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: heatmapData,
+    dissipating: true,
+    radius: 30,
+    map: map
+  });
 }
     </script>
     <!--Load the API from the specified URL

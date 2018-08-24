@@ -1,0 +1,68 @@
+{% extends "base_generic.html" %}
+{% block title %}Blog App{% endblock title %}
+
+{% block content %}
+<div class='navbar'>
+  <a href="{% url 'fmsapp:' %}">
+    <button type="submit">button1</button>
+  </a>
+  <a href="{% url 'fmsapp:' %}">
+    <button type="submit">button1</button>
+  </a>
+  <a href="{% url 'fmsapp:' %}">
+    <button type="submit">button1</button>
+  </a>
+</div>
+
+<div>
+  You are logged in as: <b>{{user}}</b>
+  <p></p>
+  <a href="{% url 'register' %}" method="GET">
+    <button type="submit">Create New User</button>
+  </a>
+  <p></p>
+  <a href="{% url 'login' %}" method="GET">
+    <button type="submit">Login</button>
+  </a>
+  <p></p>
+  <a href="{% url 'logout' %}" method="GET">
+    <button type="submit">Logout</button>
+  </a>
+</div>
+Add a Blog Post:
+<form action="{% url 'blogapp:add_blogpost' %}" method="POST">
+  {% csrf_token %}
+  Blog Post Title<input type="text" name="title"/>
+  Body of Blog Post<input type="text" name="body"/>
+  <button type="submit">Add Blog Post</button>
+</form>
+<ul>
+  {% for blog_item in blogposts %}
+  <li>
+    <p><b>{{ blog_item.title }}</b> by <b>{{blog_item.user.username}}</b> created at {{blog_item.timestamp}}</p>
+    <!-- <p>{{ blog_item.completed }}</p> -->
+    <p>{{ blog_item.body }}</p>
+    <form action="{% url 'blogapp:add_comment' pk=blog_item.pk %}" method="POST">
+      {% csrf_token %}
+      Body of Comment<input type="text" name="body"/>
+      <button type="submit">Comment</button>
+    </form>
+    <a href="{% url 'blogapp:delete_blogpost' pk=blog_item.pk %}" method="GET">
+      <button type="submit">Delete Blog Post</button>
+    </a>
+    <ul>
+
+      {% for comment_item in blog_item.comments %}
+      <li>
+        <p>{{comment_item.body}}</p>
+        <p>Posted by {{comment_item.user.username}} at {{comment_item.timestamp}}</p>
+        <a href="{% url 'blogapp:delete_comment' pk=comment_item.pk %}" method="GET">
+          <button type="submit">Delete Comment</button>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content %}
