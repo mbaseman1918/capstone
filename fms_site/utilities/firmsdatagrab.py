@@ -14,17 +14,23 @@
 import csv
 import requests
 
-V_CSV_URL = 'https://firms.modaps.eosdis.nasa.gov/data/active_fire/viirs/csv/VNP14IMGTDL_NRT_USA_contiguous_and_Hawaii_24h.csv'
-M_CSV_URL = 'https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/MODIS_C6_USA_contiguous_and_Hawaii_24h.csv'
 
-
-with requests.Session() as s:
-    download = s.get(M_CSV_URL)
-
-    decoded_content = download.content.decode('utf-8')
-
-    cr = csv.reader(decoded_content.splitlines(), delimiter=',')
-    my_list = list(cr)
+def get_fire_data():
+    V_CSV_URL = 'https://firms.modaps.eosdis.nasa.gov/data/active_fire/viirs/csv/VNP14IMGTDL_NRT_USA_contiguous_and_Hawaii_24h.csv'
+    M_CSV_URL = 'https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/MODIS_C6_USA_contiguous_and_Hawaii_24h.csv'
     list_of_dict = []
-    for row in my_list:
-        print(row)
+
+    with requests.Session() as s:
+        download = s.get(M_CSV_URL)
+        decoded_content = download.content.decode('utf-8')
+        cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+        my_list = list(cr)
+        # print(my_list[0])
+        for row in my_list:
+            lat = row[0]
+            lng = row[1]
+            lat_lng = {'lat':lat, 'lng':lng}
+            list_of_dict.append(lat_lng)
+        print(list_of_dict)
+
+get_fire_data()

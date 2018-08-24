@@ -5,6 +5,9 @@ from django.contrib.auth.decorators import login_required, permission_required, 
 from django.urls import reverse
 from .models import Address
 from utilities.secrets import GeoCoding_API
+from utilities.geocoding import get_user_lat_lng
+from utilities.firmsdatagrab import get_fire_data
+
 # Create your views here.
 
 def index(request):
@@ -31,4 +34,17 @@ def compare_address(request):
     pass
 
 def display_address_on_map(request):
-    src = "https://maps.googleapis.com/maps/api/js?key="+GeoCoding_API+"&callback=initMap"
+    lat_lng = get_user_lat_lng(request)
+    lat = lat_lng['lat']
+    lng = lat_lng['lng']
+    print(lat_lng)
+    print(lat)
+    print(lng)
+    # return HttpResponse(lat_lng['lat'])
+    map_src = "https://maps.googleapis.com/maps/api/js?key="+GeoCoding_API+"&callback=initMap"
+    context = {
+    'map_user':map_src,
+    'lat':lat,
+    'lng':lng,
+    }
+    return render(request, 'fmsapp/map.html', context)
