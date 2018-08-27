@@ -1,5 +1,5 @@
 {% extends "base_generic.html" %}
-{% block title %}Blog App{% endblock title %}
+{% block title %}Fire Management System{% endblock title %}
 
 {% block content %}
 <nav>
@@ -16,15 +16,12 @@
       <button type="submit">Logout</button>
     </a>
   </div>
-  <div>
+  {% if user %}<div>
     You are logged in as: <b>{{user}}</b>
-  </div>
+  </div>{% endif %}
   <a href="{% url 'fmsapp:index'%}">Home</a>
-  <a href="{% url 'fmsapp:index'%}">Overview</a>
-  <a href="{% url 'fmsapp:display_address_on_map' %}">Application</a>
-  <a href="{% url 'fmsapp:index'%}">Data Sources</a>
-  <a href="{% url 'fmsapp:display_address_on_map' %}">Map</a>
-  <a href="{% url 'fmsapp:about' %}">About</a>
+  <a href="{% url 'fmsapp:display_address_on_map2' %}">Fire Marker application</a>
+  <a href="{% url 'fmsapp:display_address_on_map1' %}">Heatmap application</a>
   <a href="{% url 'fmsapp:resources' %}">Resources</a>
 </nav>
 
@@ -32,12 +29,18 @@
 
 <div class="content">
   <h1>Welcome to the Fire Management System<h1>
+    <h2>Under continual development</h2>
+    <p>As part of my capstone project at <b><a href=https://pdxcodeguild.com/> PDX Code Guild</a></b> I have begun working on a
+    Fire Management System.  The goal of the project is to develop an application which can alert users of wildfires in near
+    real-time.  In order to develop this capability data from Fire Information for Resource Management System (FIRMS) was used.  The goal of the application
+    is to allow a user to enter a specific area and obtain current relevant informaiton on whether or not a fire is
+    occuring nearby.</p>
     <h3>Current application features:</h3>
     <ul>
       <li>Allow a user to create an account which includes both a physical address and an e-mail address</li>
       <li>Takes the physical address of the user and geocodes (translates to latitude and longitude) it thru the google maps API</li>
       <li>Acquires fire incident location information from Fire Information for Resource Management System (FIRMS)</li>
-      <li>Displays user's physical address and fire incident location, allowing near-real time (NRT) comparison</li>
+      <li>Displays user's physical address and fire incident location, allowing near real-time (NRT) comparison</li>
       <li>Displays user's physical address and a heatmap of fire incidents allowing an estimate of the intensity of nearby fire incidents</li>
     </ul>
     <h3>Proposed future application features:</h3>
@@ -48,8 +51,6 @@
       <li>Allow predictive modeling of fire spread</li>
       <li>Incorporate a weather API to get information on past weather and forecast of weather</li>
       <li>Predict time estimates for digging fireline</li>
-      <li></li>
-      <li></li>
     </ul>
 </div>
 

@@ -14,13 +14,16 @@ def index(request):
     if User.is_authenticated:
         context = {
         'user':request.user,
+        'user_real': request.user == "AnonymousUser",
         }
+
     return render(request,'fmsapp/index.html', context)
 
 def compare_address(request):
     pass
 
-def display_address_on_map(request):
+@login_required
+def display_address_on_map1(request):
     targ_user = request.user
     fire_list = get_fire_data()
     fire_lat = []
@@ -31,7 +34,29 @@ def display_address_on_map(request):
     user_lat_lng = get_user_lat_lng(request, targ_user)
     user_lat = user_lat_lng['lat']
     user_lng = user_lat_lng['lng']
-    map_src = "https://maps.googleapis.com/maps/api/js?key="+GeoCoding_API+"&callback=initMap"
+    map_src = "https://maps.googleapis.com/maps/api/js?key="+GeoCoding_API+"&libraries=visualization&callback=initMap"
+    context = {
+    'map_user':map_src,
+    'user_lat':user_lat,
+    'user_lng':user_lng,
+    'fire_lat':fire_lat,
+    'fire_lng':fire_lng,
+    }
+    return render(request, 'fmsapp/map.html', context)
+
+@login_required
+def display_address_on_map2(request):
+    targ_user = request.user
+    fire_list = get_fire_data()
+    fire_lat = []
+    fire_lng = []
+    for i in fire_list[1:]:
+        fire_lat.append(float(i['lat']))
+        fire_lng.append(float(i['lng']))
+    user_lat_lng = get_user_lat_lng(request, targ_user)
+    user_lat = user_lat_lng['lat']
+    user_lng = user_lat_lng['lng']
+    map_src = "https://maps.googleapis.com/maps/api/js?key="+GeoCoding_API+"&libraries=visualization&callback=initMap"
     context = {
     'map_user':map_src,
     'user_lat':user_lat,
@@ -41,8 +66,10 @@ def display_address_on_map(request):
     }
     return render(request, 'fmsapp/map2.html', context)
 
-def about(request):
-    return render(request, 'fmsapp/capstone_application.html')
-
 def resources(request):
-    pass
+    if User.is_authenticated:
+        context = {
+        'user':request.user,
+        'user_real': request.user == "AnonymousUser",
+        }
+    return render(request,'fmsapp/capstone_data.html', context)

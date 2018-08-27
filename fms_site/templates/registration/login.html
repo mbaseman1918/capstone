@@ -12,23 +12,37 @@
   <p>Your account doesn't have access to this page. To proceed,
   please login with an account that has access.</p>
 {% else %}
+  <div class="spacer"></div>
   <p>Please login to see this page.</p>
 {% endif %}
 {% endif %}
 <nav>
+  <div>
+    <a href="{% url 'register' %}" method="GET">
+      <button type="submit">Create New User</button>
+    </a>
+    <p></p>
+    <a href="{% url 'login' %}" method="GET">
+      <button type="submit">Login</button>
+    </a>
+    <p></p>
+    <a href="{% url 'logout' %}" method="GET">
+      <button type="submit">Logout</button>
+    </a>
+  </div>
+  {% if user %}<div>
+    You are logged in as: <b>{{user}}</b>
+  </div>{% endif %}
   <a href="{% url 'fmsapp:index'%}">Home</a>
-  <a href="{% url 'fmsapp:index'%}">Overview</a>
-  <a href="{% url 'fmsapp:display_address_on_map' %}">Application</a>
-  <a href="{% url 'fmsapp:index'%}">Data Sources</a>
-  <a href="{% url 'fmsapp:display_address_on_map' %}">Map</a>
-  <a href="{% url 'fmsapp:about' %}">About</a>
+  <a href="{% url 'fmsapp:display_address_on_map2' %}">Fire Marker application</a>
+  <a href="{% url 'fmsapp:display_address_on_map1' %}">Heatmap application</a>
   <a href="{% url 'fmsapp:resources' %}">Resources</a>
 </nav>
 
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
 <div class="spacer"></div>
-<div class="spacer"></div>
+<div class="content">
 <div>
 <td>{{ form.username.label_tag }}</td>
 <td>{{ form.username }}</td>
@@ -51,5 +65,5 @@
 
 {# Assumes you setup the password_reset view in your URLconf #}
 <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
+</div>
 {% endblock %}
