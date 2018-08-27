@@ -10,7 +10,6 @@
     </style>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'fmsapp/css/style_capstone.css' %}">
-
   </head>
   <body class="wildfire">
     <nav>
@@ -31,10 +30,11 @@
         You are logged in as: <b>{{user}}</b>
       </div>{% endif %}
       <a href="{% url 'fmsapp:index'%}">Home</a>
-      <a href="{% url 'fmsapp:display_address_on_map2' %}">Fire Marker application</a>
-      <a href="{% url 'fmsapp:display_address_on_map1' %}">Heatmap application</a>
+      <a href="{% url 'fmsapp:display_address_on_map1' %}">Fire Marker application</a>
+      <a href="{% url 'fmsapp:display_address_on_map2' %}">Heatmap application</a>
       <a href="{% url 'fmsapp:resources' %}">Resources</a>
     </nav>
+
     <div class="spacer"></div>
 
     <!--The div element for the map -->
@@ -46,9 +46,9 @@ function initMap() {
   var uluru = {lat: {{user_lat}}, lng: {{user_lng}}};
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru, mapTypeId: 'terrain'});
+      document.getElementById('map'), {zoom: 6, center: uluru, mapTypeId: 'terrain'});
   // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
+  var marker = new google.maps.Marker({position: uluru, label: "You", map: map});
 
   var fire_lat = {{fire_lat}};
   var fire_lng = {{fire_lng}};
@@ -57,13 +57,8 @@ function initMap() {
   for (var i = 0; i < fire_lat.length; i++) {
     var latLng = new google.maps.LatLng(fire_lat[i],fire_lng[i]);
     heatmapData.push(latLng);
+    var marker = new google.maps.Marker({position: latLng, map: map});
   };
-  var heatmap = new google.maps.visualization.HeatmapLayer({
-    data: heatmapData,
-    dissipating: true,
-    radius: 30,
-    map: map
-  });
 }
     </script>
     <!--Load the API from the specified URL

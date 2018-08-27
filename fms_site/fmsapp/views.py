@@ -42,7 +42,7 @@ def display_address_on_map1(request):
     'fire_lat':fire_lat,
     'fire_lng':fire_lng,
     }
-    return render(request, 'fmsapp/map.html', context)
+    return render(request, 'fmsapp/map1.html', context)
 
 @login_required
 def display_address_on_map2(request):
