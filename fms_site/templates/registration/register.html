@@ -2,6 +2,19 @@
 {% block title %}Login{% endblock title %}
 
 {% block content %}
+<nav>
+  <a href="{% url 'fmsapp:index'%}">Home</a>
+  <a href="{% url 'fmsapp:index'%}">Overview</a>
+  <a href="{% url 'fmsapp:display_address_on_map' %}">Application</a>
+  <a href="{% url 'fmsapp:index'%}">Data Sources</a>
+  <a href="{% url 'fmsapp:display_address_on_map' %}">Map</a>
+  <a href="{% url 'fmsapp:about' %}">About</a>
+  <a href="{% url 'fmsapp:resources' %}">Resources</a>
+</nav>
+
+<div class="spacer"></div>
+
+<div class="content">
 <form action="{% url 'register' %}" method="POST">
   {% csrf_token %}
 {{ form }}
@@ -9,4 +22,5 @@
 {{ addressform }}
 <button type="submit">Submit</button>
 </form>
+</div>
 {% endblock %}

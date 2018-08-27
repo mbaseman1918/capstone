@@ -25,26 +25,19 @@ def get_fire_data():
         decoded_content = download.content.decode('utf-8')
         cr = csv.reader(decoded_content.splitlines(), delimiter=',')
         my_list = list(cr)
-        # print(my_list[0])
         for row in my_list:
             lat = row[0]
             lng = row[1]
             lat_lng = {'lat':lat, 'lng':lng}
             list_of_dict.append(lat_lng)
-        # print(my_list[-1])
     with requests.Session() as s:
         download = s.get(V_CSV_URL)
         decoded_content = download.content.decode('utf-8')
         cr = csv.reader(decoded_content.splitlines(), delimiter=',')
         my_list = list(cr)
-        # print(my_list[0])
         for row in my_list[1:]:
             lat = row[0]
             lng = row[1]
             lat_lng = {'lat':lat, 'lng':lng}
             list_of_dict.append(lat_lng)
-        # print(my_list[-1])
-
     return list_of_dict
-
-get_fire_data()

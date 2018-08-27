@@ -11,9 +11,9 @@ grid-template-rows: repeat(3,1fr);grid-template-columns: repeat(4,1fr)}
 
 a {color: white}
 div.spacer {height: 20vh;}
-nav {padding: 1em;background: hsla(0, 0%, 30%, 0.7);width:100%;display:flex;align-items: center;justify-content: space-around;position: fixed;top:0;}
+nav {margin-bottom: 1px;padding: 1em;background: hsla(0, 0%, 30%, 0.7);width:100%;display:flex;align-items: center;justify-content: space-around;position: fixed;top:0;}
 div.split {display:flex;justify-content: space-around;}
 div.capstone {padding-bottom: 30px;width:80%;display:flex;flex-direction: column;align-items: center;justify-content: center;}
 div.capstone p {width:80%;}
-div.content {grid-area: c;flex-direction: column;display: flex;justify-content: center;align-items: center;}
+div.content {padding:20px;background: hsla(0, 0%, 30%, 0.7);width: 80%;flex-direction: column;display: flex;justify-content: center;align-items: center;}
 div.blank {grid-area: .}

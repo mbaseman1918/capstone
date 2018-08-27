@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title> {% block title %}{% endblock title %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'fmsapp/css/style_capstone.css' %}">
   </head>
-  <body>
+  <body class="wildfire">
     {% block content %}
     {% endblock content %}
   </body>

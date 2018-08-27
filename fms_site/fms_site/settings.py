@@ -128,4 +128,4 @@ STATICFILES_DIRS = (
     ),
 )
 
-LOGIN_REDIRECT_URL = '/fmsapp/index'
+LOGIN_REDIRECT_URL = '/fmsapp/index/'

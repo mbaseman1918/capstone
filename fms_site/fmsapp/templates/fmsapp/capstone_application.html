@@ -4,23 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matthew Baseman Portfolio Page</title>
-    <link rel="stylesheet" type="text/css" href="style_capstone.css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'fmsapp/css/style_capstone.css' %}">
   </head>
-  <body class="application">
+  <body class="wildfire">
 
     <nav>
-      <a href=capstone_index.html>Home</a>
-      <a href=capstone_overview.html>Overview</a>
-      <a href=capstone_application.html>Application</a>
-      <a href=capstone_data.html>Data Sources</a>
+      <a href="{% url 'fmsapp:index'%}">Home</a>
+      <a href="{% url 'fmsapp:index'%}">Overview</a>
+      <a href="{% url 'fmsapp:display_address_on_map' %}">Application</a>
+      <a href="{% url 'fmsapp:index'%}">Data Sources</a>
+      <a href="{% url 'fmsapp:display_address_on_map' %}">Map</a>
+      <a href="{% url 'fmsapp:about' %}">About</a>
+      <a href="{% url 'fmsapp:resources' %}">Resources</a>
     </nav>
+
+    <div class="spacer"></div>
 
     <div class="content">
       <h3>Phoenix</h3>
-      <h5>Currently under development</h5>
+      <h5>Under continual development</h5>
       <p>As part of the program at <b><a href=https://pdxcodeguild.com/> PDX Code Guild</a></b> I have begun working on a
       capstone project.  The goal of the project is to develop an application which can alert users of wildfires in near
-      real-time.  In order to develop this capability data from ****** was used.  The application goal of the application
+      real-time.  In order to develop this capability data from Fire Information for Resource Management System (FIRMS) was used.  The goal of the application
       is to allow a user to enter a specific area and obtain current relevant informaiton on whether or not a fire is
       occuring nearby.</p>
       <a href="">Phoenix</a>

@@ -2,67 +2,55 @@
 {% block title %}Blog App{% endblock title %}
 
 {% block content %}
-<div class='navbar'>
-  <a href="{% url 'fmsapp:' %}">
-    <button type="submit">button1</button>
-  </a>
-  <a href="{% url 'fmsapp:' %}">
-    <button type="submit">button1</button>
-  </a>
-  <a href="{% url 'fmsapp:' %}">
-    <button type="submit">button1</button>
-  </a>
-</div>
-
-<div>
-  You are logged in as: <b>{{user}}</b>
-  <p></p>
-  <a href="{% url 'register' %}" method="GET">
-    <button type="submit">Create New User</button>
-  </a>
-  <p></p>
-  <a href="{% url 'login' %}" method="GET">
-    <button type="submit">Login</button>
-  </a>
-  <p></p>
-  <a href="{% url 'logout' %}" method="GET">
-    <button type="submit">Logout</button>
-  </a>
-</div>
-Add a Blog Post:
-<form action="{% url 'blogapp:add_blogpost' %}" method="POST">
-  {% csrf_token %}
-  Blog Post Title<input type="text" name="title"/>
-  Body of Blog Post<input type="text" name="body"/>
-  <button type="submit">Add Blog Post</button>
-</form>
-<ul>
-  {% for blog_item in blogposts %}
-  <li>
-    <p><b>{{ blog_item.title }}</b> by <b>{{blog_item.user.username}}</b> created at {{blog_item.timestamp}}</p>
-    <!-- <p>{{ blog_item.completed }}</p> -->
-    <p>{{ blog_item.body }}</p>
-    <form action="{% url 'blogapp:add_comment' pk=blog_item.pk %}" method="POST">
-      {% csrf_token %}
-      Body of Comment<input type="text" name="body"/>
-      <button type="submit">Comment</button>
-    </form>
-    <a href="{% url 'blogapp:delete_blogpost' pk=blog_item.pk %}" method="GET">
-      <button type="submit">Delete Blog Post</button>
+<nav>
+  <div>
+    <a href="{% url 'register' %}" method="GET">
+      <button type="submit">Create New User</button>
     </a>
-    <ul>
+    <p></p>
+    <a href="{% url 'login' %}" method="GET">
+      <button type="submit">Login</button>
+    </a>
+    <p></p>
+    <a href="{% url 'logout' %}" method="GET">
+      <button type="submit">Logout</button>
+    </a>
+  </div>
+  <div>
+    You are logged in as: <b>{{user}}</b>
+  </div>
+  <a href="{% url 'fmsapp:index'%}">Home</a>
+  <a href="{% url 'fmsapp:index'%}">Overview</a>
+  <a href="{% url 'fmsapp:display_address_on_map' %}">Application</a>
+  <a href="{% url 'fmsapp:index'%}">Data Sources</a>
+  <a href="{% url 'fmsapp:display_address_on_map' %}">Map</a>
+  <a href="{% url 'fmsapp:about' %}">About</a>
+  <a href="{% url 'fmsapp:resources' %}">Resources</a>
+</nav>
 
-      {% for comment_item in blog_item.comments %}
-      <li>
-        <p>{{comment_item.body}}</p>
-        <p>Posted by {{comment_item.user.username}} at {{comment_item.timestamp}}</p>
-        <a href="{% url 'blogapp:delete_comment' pk=comment_item.pk %}" method="GET">
-          <button type="submit">Delete Comment</button>
-        </a>
-      </li>
-      {% endfor %}
+<div class="spacer"></div>
+
+<div class="content">
+  <h1>Welcome to the Fire Management System<h1>
+    <h3>Current application features:</h3>
+    <ul>
+      <li>Allow a user to create an account which includes both a physical address and an e-mail address</li>
+      <li>Takes the physical address of the user and geocodes (translates to latitude and longitude) it thru the google maps API</li>
+      <li>Acquires fire incident location information from Fire Information for Resource Management System (FIRMS)</li>
+      <li>Displays user's physical address and fire incident location, allowing near-real time (NRT) comparison</li>
+      <li>Displays user's physical address and a heatmap of fire incidents allowing an estimate of the intensity of nearby fire incidents</li>
     </ul>
-  </li>
-  {% endfor %}
-</ul>
+    <h3>Proposed future application features:</h3>
+    <ul>
+      <li>Create a manager user group with incident managemant features</li>
+      <li>Create a fire crew user group with crew management features</li>
+      <li>Allow e-mail alerts to be sent out</li>
+      <li>Allow predictive modeling of fire spread</li>
+      <li>Incorporate a weather API to get information on past weather and forecast of weather</li>
+      <li>Predict time estimates for digging fireline</li>
+      <li></li>
+      <li></li>
+    </ul>
+</div>
+
 {% endblock content %}
