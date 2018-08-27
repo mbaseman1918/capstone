@@ -16,9 +16,9 @@
       <button type="submit">Logout</button>
     </a>
   </div>
-  {% if user %}<div>
+  <div>
     You are logged in as: <b>{{user}}</b>
-  </div>{% endif %}
+  </div>
   <a href="{% url 'fmsapp:index'%}">Home</a>
   <a href="{% url 'fmsapp:display_address_on_map2' %}">Fire Marker application</a>
   <a href="{% url 'fmsapp:display_address_on_map1' %}">Heatmap application</a>
@@ -33,7 +33,7 @@
     <p>As part of my capstone project at <b><a href=https://pdxcodeguild.com/> PDX Code Guild</a></b> I have begun working on a
     Fire Management System.  The goal of the project is to develop an application which can alert users of wildfires in near
     real-time.  In order to develop this capability data from Fire Information for Resource Management System (FIRMS) was used.  The goal of the application
-    is to allow a user to enter a specific area and obtain current relevant informaiton on whether or not a fire is
+    is to allow a user to enter a specific area and obtain current relevant information on whether or not a fire is
     occuring nearby.</p>
     <h3>Current application features:</h3>
     <ul>
